@@ -1,0 +1,13 @@
+CREATE DATABASE test_db;
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `users` ( 
+	email VARCHAR(100) PRIMARY KEY NOT NULL,
+	username VARCHAR(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+	password VARCHAR(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+	first_name VARCHAR(30) NOT NULL DEFAULT '', 
+	last_name VARCHAR(30) NOT NULL DEFAULT '', 
+	address TEXT NOT NULL, 
+	tel_number VARCHAR(20) NOT NULL DEFAULT '' 
+);
