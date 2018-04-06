@@ -1,5 +1,6 @@
 <?php
-header("Content-Type: application/json; charset=UTF-8");
+
+session_start();
 
 include_once '../DbConnection.php';
 include_once '../User.php';
@@ -9,17 +10,19 @@ $conn = $db_conn->getConnection();
 
 $user = new User($conn);
 
-$statement = $user->createUser(
-	'test@test.com', 
-	'test1',
-	'test1pwd!',
-	'One',
-	'Test',
-	'Test Street, Vietnam',
-	'084-000-000-000'
-);
+if(isset($_POST['createUser'])) {
+        $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
+        $username = !empty($_POST['username']) ? trim($_POST['username']) : null;
+        $password = !empty($_POST['password']) ? trim($_POST['password']) : null;
+        $first_name = !empty($_POST['first_name']) ? trim($_POST['first_name']) : null;
+        $last_name = !empty($_POST['last_name']) ? trim($_POST['last_name']) : null;
+        $address = !empty($_POST['address']) ? trim($_POST['address']) : null;
+        $tel_number = !empty($_POST['tel_number']) ? trim($_POST['tel_number']) : null;
 
-echo "User created.\n";
+        $statement = $user->createUser($email, $username, $password, $first_name, $last_name, $address, $tel_number);
+
+        echo "User created.\n";
+}
 ?>
 
 <!DOCTYPE html>
